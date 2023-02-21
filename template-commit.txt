@@ -1,0 +1,33 @@
+# ----------------------------------------------------------
+#   Para realizar un nuevo commit 
+#   utilice la siguente plantilla.
+# ----------------------------------------------------------
+#   Template Commit 
+#
+#   |---1----| |------------------2------------------|  |---3----|
+#   [WIP/END/]:[#NNN/TASK/BUG/DOC/REF/IMG/PRF/TST/CID]: [descrip.]
+# ----------------------------------------------------------
+#   1. Debe empezar por uno de estos prefijos:
+#   - WIP: si lleva trabajo sin terminar
+#   - END: si es código final, listo para revisar
+#
+#   2. Según el tipo de código, debe llevar un de estos prefijos:
+#   - #NNN: número de tarea a la que pertenece el trabajo
+#   - TASK: tarea sin identidicacion  a la que pertenece el trabajo
+#   - BUG: cuando corrige un bug
+#   - DOC: si se está modificando documentación
+#   - REF: si es solo una refactorización
+#   - IMG: si son retoques estéticos/de imagen
+#   - PRF: retoques de rendimiento
+#   - TST: código relacionado con tests
+#   - CID: cambios al proceso de CI/CD
+#
+#   3. la descripcion debe ser algo breve, 
+#   pero descriptivo de lo que ha hecho.
+# ----------------------------------------------------------
+#   Ejemplo: 
+#   WIP:#123: Nuevo formulario de crear producto
+#   END:BUG: Problema con calculo de hash
+#   WIP:DOC: Actualización manuel de usuario
+# ----------------------------------------------------------
+
