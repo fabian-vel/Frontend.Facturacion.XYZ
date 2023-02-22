@@ -1,0 +1,44 @@
+.container {
+    display: grid;
+    background: #673ab7;
+    background: -webkit-linear-gradient(to right, #6563ff, #673ab7);
+    background: linear-gradient(to right, #6563ff, #673ab7);
+    height: 100vh;
+    .login {
+        margin: auto;
+        display: flex;
+        background-color: white;
+        border-radius: 20px;
+        width: 60%;
+        height: 70%;
+        text-align: center;
+        .img-logo {
+            width: 40%;
+            margin: auto;
+            img {
+                width: 70%;
+                margin-left: 20%;
+            }
+        }
+        .form {
+            width: 60%;
+            margin: auto;
+            h1 {
+                text-align: center;
+                font-size: 50px;
+                margin-bottom: 40px;
+            }
+            .example-form-field {
+                width: 500px;
+                margin-bottom: 2%;
+                font-size: 25px;
+            }
+            .button {
+                width: 400px;
+                height: 50px;
+                font-size: 25px;
+                border-radius: 40px;
+            }
+        }
+    }
+}

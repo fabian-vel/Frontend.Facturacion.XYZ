@@ -1,17 +1,30 @@
 <div class="container">
-    <div class="logo">
-
-    </div>
     <div class="login">
-        <form action="">
-            <h1>Login</h1>
-            <div class="user">
-                <mat-icon></mat-icon>
-                <input type="email" placeholder="Emain">
-            </div>
-            <div class="password">
-                <input type="password" placeholder="password">
-            </div>
-        </form>
+
+        <div class="img-logo">
+            <img src="https://cdn1.iconfinder.com/data/icons/unicons-line-vol-6/24/user-circle-256.png" alt="" class="img">
+        </div>
+
+        <div class="form">
+            <form action="">
+
+                <h1>Login</h1>
+
+                <mat-form-field class="example-form-field">
+                    <mat-label><mat-icon class="icon">mail</mat-icon> Email</mat-label>
+                    <input matInput type="email">
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field">
+                    <mat-label><mat-icon class="icon">lock</mat-icon> Password</mat-label>
+                    <input matInput type="password">
+                </mat-form-field>
+
+                <div class="button-group">
+                    <button mat-raised-button color="primary" class="button">Iniciar sesion</button>
+                </div>
+                
+            </form>
+        </div>
     </div>
 </div>
