@@ -1,0 +1,33 @@
+.titulo {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    .icon {
+        position: absolute;
+        right: -10px;
+        top: -10px;
+    }
+}
+
+.form-modal {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    font-size: 20px;
+    .example-form-field {
+        margin-top: 2%;
+        .datepicker-toggle {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+    .dueño {
+        margin-top: 2%;
+    }
+}
+
+h1 {
+    margin-top: 3%;
+    margin-left: 2%;
+}

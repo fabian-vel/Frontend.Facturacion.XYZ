@@ -1,0 +1,81 @@
+<ng-template #ngModal>
+    <div class="titulo">
+        <h1 mat-dialog-title>Datos del Paciente</h1>
+        <button mat-icon-button matTooltip="Primary" color="warn" [mat-dialog-close]="true" cdkFocusInitial
+            class="icon">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-dialog-content class="dialog-content">
+        <div class="container-modal">
+            <form class="form-modal">
+                <mat-form-field appearance="outline" class="example-form-field">
+                    <mat-label>Nombre del paciente</mat-label>
+                    <input matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="example-form-field">
+                    <mat-label>Especie del paciente</mat-label>
+                    <input matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="example-form-field">
+                    <mat-label>Raza del paciente</mat-label>
+                    <input matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="example-form-field">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker" class="datepicker-toggle">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker color="warn"></mat-datepicker>
+                </mat-form-field>
+
+                <div class="dueño">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Dueño</mat-label>
+                        <mat-select name="food">
+                            <mat-option *ngFor="let item of duenio" [value]="item">
+                                {{item}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary">Registrar Dueño</button>
+                </div>
+
+                <mat-form-field appearance="outline" class="example-form-field">
+                    <mat-label>Ciudad</mat-label>
+                    <input matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="example-form-field">
+                    <mat-label>Direccion</mat-label>
+                    <input matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="example-form-field">
+                    <mat-label>Fecha de registro</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker" class="datepicker-toggle">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker color="primary"></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="example-form-field">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput type="tel">
+                </mat-form-field>
+            </form>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions aling="end">
+
+        <button mat-raised-button color="primary" mat-dialog-close><mat-icon>save</mat-icon></button>
+
+    </mat-dialog-actions>
+</ng-template>
+<h1>Administracion de pacientes</h1>
+<button mat-raised-button color="primary" (click)="openDialog(ngModal)"><mat-icon>add</mat-icon></button>
