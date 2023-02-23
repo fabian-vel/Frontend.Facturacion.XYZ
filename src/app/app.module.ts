@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-<<<<<<< HEAD
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -34,21 +33,6 @@ import { PacienteComponent } from './components/paciente/paciente.component';
     MatNativeDateModule
   ],
   providers: [
-    MatDatepickerModule,
-    MatNativeDateModule
-=======
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
->>>>>>> parent of 26a643e (WIP:TASK: Se creo component Login e instalo Material)
   ],
   bootstrap: [AppComponent]
 })
