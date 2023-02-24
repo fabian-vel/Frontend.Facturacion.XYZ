@@ -83,16 +83,16 @@
 
     <mat-form-field appearance="outline" class="filter">
         <mat-label>
-            Buscar            
+            Buscar
         </mat-label>
         <mat-icon matPrefix>search</mat-icon>
-        
+
         <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
     <button mat-fab color="primary" (click)="openDialog(ngModal)" class="button-add"><mat-icon>add</mat-icon></button>
 
 
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matTableExporter #exporter="matTableExporter">
 
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Id </th>
@@ -167,7 +167,8 @@
 </div>
 
 <div class="button-export-content">
-    <button mat-raised-button class="button-export">
+    <button mat-raised-button class="button-export"
+        (click)="exporter.exportTable('xlsx', {fileName:'Lista-pacoentes-XYZ'})">
         <mat-icon>save_alt</mat-icon> Exportar .xlsx
     </button>
 </div>
