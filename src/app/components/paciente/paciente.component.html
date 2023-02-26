@@ -26,11 +26,11 @@
 
                 <mat-form-field appearance="outline" class="example-form-field">
                     <mat-label>Fecha de nacimiento </mat-label>
-                    <input matInput [matDatepicker]="picker">
+                    <input matInput [matDatepicker]="picker1">
                     <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker" class="datepicker-toggle">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker1" class="datepicker-toggle">
                     </mat-datepicker-toggle>
-                    <mat-datepicker #picker color="warn"></mat-datepicker>
+                    <mat-datepicker #picker1 color="warn"></mat-datepicker>
                 </mat-form-field>
 
                 <div class="dueño">
@@ -42,7 +42,6 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <button mat-raised-button color="primary">Registrar Dueño</button>
                 </div>
 
                 <mat-form-field appearance="outline" class="example-form-field">
@@ -57,11 +56,11 @@
 
                 <mat-form-field appearance="outline" class="example-form-field">
                     <mat-label>Fecha de registro</mat-label>
-                    <input matInput [matDatepicker]="picker">
+                    <input matInput [matDatepicker]="picker2">
                     <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker" class="datepicker-toggle">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker2" class="datepicker-toggle">
                     </mat-datepicker-toggle>
-                    <mat-datepicker #picker color="primary"></mat-datepicker>
+                    <mat-datepicker #picker2 color="warn"></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="example-form-field">
@@ -71,104 +70,56 @@
             </form>
         </div>
     </mat-dialog-content>
-    <mat-dialog-actions aling="end">
 
+    <mat-dialog-actions>
         <button mat-raised-button color="primary" mat-dialog-close><mat-icon>save</mat-icon></button>
-
     </mat-dialog-actions>
+
 </ng-template>
+
 <h1>Administracion de pacientes</h1>
 
 <div class="content">
-
     <mat-form-field appearance="outline" class="filter">
-        <mat-label>
-            Buscar
-        </mat-label>
+        <mat-label>Buscar</mat-label>
         <mat-icon matPrefix>search</mat-icon>
-
         <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
-    <button mat-fab color="primary" (click)="openDialog(ngModal)" class="button-add"><mat-icon>add</mat-icon></button>
 
+    <button mat-raised-button color="primary" (click)="openDialog(ngModal)" class="button-add">
+        <mat-icon>pets</mat-icon> Nuevo Paciente</button>
+    <button mat-raised-button color="primary" (click)="openDialogDuenio()" class="button-add">
+        <mat-icon>person</mat-icon> Nuevo dueño paciente</button>
 
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matTableExporter #exporter="matTableExporter">
+    <table mat-table [dataSource]="dataSources" class="mat-elevation-z8" matTableExporter #exporter="matTableExporter">
 
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> Id </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Nombre </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="especie">
-            <th mat-header-cell *matHeaderCellDef> Especie </th>
-            <td mat-cell *matCellDef="let element"> {{element.especie}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="raza">
-            <th mat-header-cell *matHeaderCellDef> Raza </th>
-            <td mat-cell *matCellDef="let element"> {{element.raza}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="fnaci">
-            <th mat-header-cell *matHeaderCellDef> Facha <br> nacimiento </th>
-            <td mat-cell *matCellDef="let element"> {{element.fnaci | date:'dd/MM/YYYY'}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="duenio">
-            <th mat-header-cell *matHeaderCellDef> Dueño </th>
-            <td mat-cell *matCellDef="let element"> {{element.duenio}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="ciudad">
-            <th mat-header-cell *matHeaderCellDef> Ciudad </th>
-            <td mat-cell *matCellDef="let element"> {{element.ciudad}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="direccion">
-            <th mat-header-cell *matHeaderCellDef> Direccion </th>
-            <td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="telefono">
-            <th mat-header-cell *matHeaderCellDef> Telefono </th>
-            <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="freg">
-            <th mat-header-cell *matHeaderCellDef> Facha <br> registro </th>
-            <td mat-cell *matCellDef="let element"> {{element.freg | date:'dd/MM/YYYY'}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="accion">
-            <th mat-header-cell *matHeaderCellDef> Opciones </th>
-            <td mat-cell *matCellDef="let element">
-                <div class="button-row">
-                    <button mat-mini-fab color="warn"><mat-icon>create</mat-icon>
-                    </button>
-                    <button mat-mini-fab color="accent"><mat-icon>delete</mat-icon>
-                    </button>
-                </div>
-            </td>
+        <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+            <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+            <td mat-cell *matCellDef="let element"> {{element[column]}}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [matMenuTriggerFor]="menu" class="btr"></tr>
+        <mat-menu #menu="matMenu" xPosition="after" style="background-color: rgba(0, 0, 0, 0.123);">
+            <button mat-mini-fab color="accent" style="margin: 5px;"
+                (click)="openDialog(ngModal)"><mat-icon>create</mat-icon></button>
+            <button mat-mini-fab color="warn" style="margin: 5px;"><mat-icon>delete</mat-icon></button>
+        </mat-menu>
 
         <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">No hay datos que coincidan con "{{input.value}}"</td>
         </tr>
+    </table>
 
-    </mat-table>
-</div>
+    <div class="button-export-content">
+        <button mat-raised-button class="button-exlsx"
+            (click)="exporter.exportTable('xlsx', {fileName:'Lista-Pacientes-XYZ'})">
+            <mat-icon>get_app</mat-icon> Exportar .xlsx
+        </button>
 
-<div class="button-export-content">
-    <button mat-raised-button class="button-export"
-        (click)="exporter.exportTable('xlsx', {fileName:'Lista-pacoentes-XYZ'})">
-        <mat-icon>save_alt</mat-icon> Exportar .xlsx
-    </button>
+        <button mat-raised-button class="button-ixlsx">
+            <mat-icon>publish</mat-icon> Importar .xlsx
+            <input type="file" #fileInput />
+        </button>
+    </div>
 </div>

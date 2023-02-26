@@ -39,7 +39,7 @@ h1 {
 }
 
 .content {
-    width: 95%;
+    width: 90%;
     margin: auto;
     .filter {
         width: 20%;
@@ -47,13 +47,17 @@ h1 {
     .button-add {
         margin-left: 1%;
     }
+    tr:hover td {
+        border-top: solid 2px rgb(34, 34, 34);
+        border-bottom: solid 2px rgb(34, 34, 34);
+    }
     th {
         font-weight: 600;
-        font-size: 17px;
+        font-size: 20px;
     }
     td,
     th {
-        width: 10%;
+        width: 9%;
         .button-row {
             display: flex;
             justify-content: center;
@@ -63,13 +67,24 @@ h1 {
         }
     }
 }
-
 .button-export-content {
-    margin-left: 3%;
+    margin-left: 2%;
     margin-top: 2%;
-    .button-export {
+    .button-exlsx,
+    .button-ixlsx {
         background-color: green;
         color: white;
         font-size: 20px;
+        margin-right: 1%;
+    }
+    .button-ixlsx {
+        position: relative;
+        input {
+            font-size: 100px;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+        }
     }
 }
