@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface Duenio {
   id: number,
@@ -52,10 +53,20 @@ export class DuenioComponent implements OnInit {
   columnsToDisplay: string[] = this.displayedColumns.slice();
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
+
   constructor(
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<DuenioComponent>){ }
 
   ngOnInit(): void {
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DuenioComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }
