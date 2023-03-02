@@ -91,7 +91,7 @@
     <button mat-raised-button color="primary" (click)="openDialogDuenio()" class="button-add">
         <mat-icon>person</mat-icon> Nuevo dueño paciente</button>
 
-    <table mat-table [dataSource]="dataSources" class="mat-elevation-z8" matTableExporter #exporter="matTableExporter">
+    <table mat-table [dataSource]="datosPacientes" class="mat-elevation-z8" matTableExporter #exporter="matTableExporter">
 
         <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
             <th mat-header-cell *matHeaderCellDef> {{column}} </th>

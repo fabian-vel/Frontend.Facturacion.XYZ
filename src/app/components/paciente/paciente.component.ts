@@ -3,32 +3,24 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { DuenioComponent } from '../duenio/duenio.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { PacientesService } from 'src/app/services/pacientes.service';
 
 export interface Paciente {
-  id: number,
-  name: string,
+  idp: number,
+  nombrep: string,
   especie: string,
   raza: string,
-  fnaci: string;
+  fecha_nacimiento: string;
   tipodoc: string,
   doc: string;
   duenio: string,
   ciudad: string,
   direccion: string,
   telefono: string
-  freg: string;
+  fecha_registro: string;
 }
 
 var fecha = new Date().toLocaleDateString('es-la', { year: "numeric", month: "numeric", day: "numeric" });
-const ELEMENT_DATA: Paciente[] = [
-  { id: 1, name: 'Pepe', especie: 'Perro', raza: 'Boxer', fnaci: fecha, tipodoc: 'CC', doc: '234156', duenio: 'Maria', ciudad: 'Pueblo Nuevo', direccion: 'Cr. 12 Cl 15', telefono: '123456', freg: fecha },
-  { id: 2, name: 'Pepe', especie: 'Perro', raza: 'Boxer', fnaci: fecha, tipodoc: 'CC', doc: '234156', duenio: 'Maria', ciudad: 'Pueblo Nuevo', direccion: 'Cr. 12 Cl 15', telefono: '123456', freg: fecha },
-  { id: 3, name: 'Pepe', especie: 'Perro', raza: 'Boxer', fnaci: fecha, tipodoc: 'CC', doc: '234156', duenio: 'Maria', ciudad: 'Pueblo Nuevo', direccion: 'Cr. 12 Cl 15', telefono: '123456', freg: fecha },
-  { id: 4, name: 'Pepe', especie: 'Perro', raza: 'Caniche', fnaci: fecha, tipodoc: 'CC', doc: '234156', duenio: 'Maria', ciudad: 'Pueblo Nuevo', direccion: 'Cr. 12 Cl 15', telefono: '123456', freg: fecha },
-  { id: 5, name: 'Pepe', especie: 'Perro', raza: 'Boxer', fnaci: fecha, tipodoc: 'CC', doc: '234156', duenio: 'Maria', ciudad: 'Pueblo Nuevo', direccion: 'Cr. 12 Cl 15', telefono: '123456', freg: fecha },
-  { id: 6, name: 'Pepe', especie: 'Perro', raza: 'Boxer', fnaci: fecha, tipodoc: 'CC', doc: '234156', duenio: 'Maria', ciudad: 'Pueblo Nuevo', direccion: 'Cr. 12 Cl 15', telefono: '123456', freg: fecha },
-  { id: 6, name: 'lulu', especie: 'Perro', raza: 'Boxer', fnaci: fecha, tipodoc: 'CC', doc: '234156', duenio: 'Maria', ciudad: 'Pueblo Nuevo', direccion: 'Cr. 12 Cl 15', telefono: '123456', freg: fecha }
-];
 
 
 @Component({
@@ -46,17 +38,23 @@ const ELEMENT_DATA: Paciente[] = [
 
 export class PacienteComponent implements OnInit {
 
+  datosPacientes: any;
   duenio = ['Jose P', 'Sara M.', 'Fernanda S.', 'Carlos A.', 'Matias H.'];
-  displayedColumns: string[] = ['id', 'name', 'especie', 'raza', 'fnaci', 'tipodoc', 'doc', 'duenio', 'ciudad', 'direccion', 'telefono', 'freg'];
+  displayedColumns: string[] = ['idp', 'nombrep', 'especie', 'raza', 'fecha_nacimiento', 'tipodoc', 'doc', 'duenio', 'ciudad', 'direccion', 'telefono', 'fecha_registro'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
-  dataSources = new MatTableDataSource(ELEMENT_DATA);
 
 
-
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private pacienteService: PacientesService) {
   }
 
   ngOnInit(): void {
+
+    this.pacienteService.getPacientes()
+    .subscribe(datos => {
+      this.datosPacientes = datos;
+      this.datosPacientes = new MatTableDataSource(datos);
+    })
+    
   }
 
   openDialog(ngModal: any) {
@@ -67,12 +65,14 @@ export class PacienteComponent implements OnInit {
     });
   }
 
+
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSources.filter = filterValue.trim().toLowerCase();
+    this.datosPacientes.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSources.paginator) {
-      this.dataSources.paginator.firstPage();
+    if (this.datosPacientes.paginator) {
+      this.datosPacientes.paginator.firstPage();
     }
   }
 

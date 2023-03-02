@@ -13,6 +13,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +27,7 @@ import { DuenioComponent } from './components/duenio/duenio.component';
     AppComponent,
     LoginComponent,
     PacienteComponent,
-    DuenioComponent
+    DuenioComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import { DuenioComponent } from './components/duenio/duenio.component';
     MatTableExporterModule,
     MatMenuModule,
     MatFormFieldModule,
-    ScrollingModule
+    ScrollingModule,
+    HttpClientModule
   ],
   providers: [
   ],
