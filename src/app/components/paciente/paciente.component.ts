@@ -11,8 +11,8 @@ export interface Paciente {
   especie: string,
   raza: string,
   fecha_nacimiento: string;
-  tipodoc: string,
-  doc: string;
+  tipo_documento: string,
+  documneto: string;
   duenio: string,
   ciudad: string,
   direccion: string,
@@ -40,7 +40,7 @@ export class PacienteComponent implements OnInit {
 
   datosPacientes: any;
   duenio = ['Jose P', 'Sara M.', 'Fernanda S.', 'Carlos A.', 'Matias H.'];
-  displayedColumns: string[] = ['idp', 'nombrep', 'especie', 'raza', 'fecha_nacimiento', 'tipodoc', 'doc', 'duenio', 'ciudad', 'direccion', 'telefono', 'fecha_registro'];
+  displayedColumns: string[] = ['idp', 'nombrep', 'especie', 'raza', 'fecha_nacimiento', 'tipo_documento', 'documento', 'duenio', 'ciudad', 'direccion', 'telefono', 'fecha_registro'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
 
 

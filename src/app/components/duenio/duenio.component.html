@@ -37,7 +37,7 @@
     </mat-dialog-actions>
 
     <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table [dataSource]="datosDuenios" class="mat-elevation-z8">
 
             <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
                 <th mat-header-cell *matHeaderCellDef> {{column}} </th>
