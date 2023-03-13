@@ -14,6 +14,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,7 +47,9 @@ import { DuenioComponent } from './components/duenio/duenio.component';
     MatMenuModule,
     MatFormFieldModule,
     ScrollingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers: [
   ],

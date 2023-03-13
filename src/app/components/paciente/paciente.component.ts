@@ -4,23 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DuenioComponent } from '../duenio/duenio.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { PacientesService } from 'src/app/services/pacientes.service';
-
-export interface Paciente {
-  idp: number,
-  nombrep: string,
-  especie: string,
-  raza: string,
-  fecha_nacimiento: string;
-  tipo_documento: string,
-  documneto: string;
-  duenio: string,
-  ciudad: string,
-  direccion: string,
-  telefono: string
-  fecha_registro: string;
-}
-
-var fecha = new Date().toLocaleDateString('es-la', { year: "numeric", month: "numeric", day: "numeric" });
+import { DuenioService } from 'src/app/services/duenio.service';
+import { Paciente } from 'src/app/interfaces/pacientes';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -39,33 +25,121 @@ var fecha = new Date().toLocaleDateString('es-la', { year: "numeric", month: "nu
 export class PacienteComponent implements OnInit {
 
   datosPacientes: any;
-  duenio = ['Jose P', 'Sara M.', 'Fernanda S.', 'Carlos A.', 'Matias H.'];
+  paciente: any;
+  duenio: any;
+  activar: boolean = false;
   displayedColumns: string[] = ['idp', 'nombrep', 'especie', 'raza', 'fecha_nacimiento', 'tipo_documento', 'documento', 'duenio', 'ciudad', 'direccion', 'telefono', 'fecha_registro'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
+  formGroup!: FormGroup;
 
-
-  constructor(public dialog: MatDialog, private pacienteService: PacientesService) {
+  constructor(public dialog: MatDialog, private pacienteService: PacientesService, private duenioService: DuenioService) {
   }
 
   ngOnInit(): void {
 
+    this.formGroup = new FormGroup({
+      idp: new FormControl(),
+      nombrep: new FormControl(),
+      especie: new FormControl(),
+      raza: new FormControl(),
+      fecha_nacimiento: new FormControl(),
+      ciudad: new FormControl(),
+      idd_duenios: new FormControl(),
+      fecha_registro: new FormControl(),
+      direccion: new FormControl(),
+      telefono: new FormControl()
+    });
+
     this.pacienteService.getPacientes()
-    .subscribe(datos => {
-      this.datosPacientes = datos;
-      this.datosPacientes = new MatTableDataSource(datos);
+      .subscribe(datos => {
+        this.datosPacientes = datos;
+        this.datosPacientes = new MatTableDataSource(datos);
+      });
+
+    this.duenioService.getDuenio()
+      .subscribe(datos => {
+        this.duenio = datos;
+      })
+  }
+
+  savePaciente(form: FormGroup) {
+    if (this.formGroup.valid) {
+      if (this.activar == true) {
+        this.updatePaciente(form);
+      } else {
+        this.pacienteService.addPacientes(form.value)
+          .subscribe(datos => {
+            alert("Paciente Guardato");
+            this.refreshDatos();
+          });
+      }
+    } else {
+      alert("Formulario invalido");
+    }
+  }
+
+  updatePaciente(form: FormGroup) {
+    this.pacienteService.updatePacientes(form.value)
+      .subscribe(datos => {
+        this.onActivar();
+        this.refreshDatos();
+        alert("Se actualizó la información del paciente");
+      })
+  }
+
+  value(value: any) {
+    this.paciente = value;
+    //console.log(this.paciente);
+  }
+
+
+  loadPaciente() {
+    this.formGroup.setValue({
+      idp: this.paciente.idp,
+      nombrep: this.paciente.nombrep,
+      especie: this.paciente.especie,
+      raza: this.paciente.raza,
+      fecha_nacimiento: this.paciente.fecha_nacimiento,
+      ciudad: this.paciente.ciudad,
+      idd_duenios: this.paciente.idd_duenios,
+      fecha_registro: this.paciente.fecha_registro,
+      direccion: this.paciente.direccion,
+      telefono: this.paciente.telefono
     })
-    
+  }
+
+  deletePaciente() {
+    this.pacienteService.deletePacientes(this.paciente.idp)
+    .subscribe(datos => {
+      alert("Paciente elininado");
+      this.refreshDatos();
+    });
+  }
+
+  onActivar() {
+    this.activar = !this.activar;
+    console.log(this.activar);
+  }
+
+  refreshDatos() {
+    this.pacienteService.getPacientes()
+      .subscribe(datos => {
+        this.datosPacientes = datos;
+        this.datosPacientes = new MatTableDataSource(datos);
+      });
   }
 
   openDialog(ngModal: any) {
     const dialogRef = this.dialog.open(ngModal);
-
+    this.refreshDatos();
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
 
-
+  openDialogUpdate(ngModal: any) {
+    const dialogRef = this.dialog.open(ngModal);
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -83,7 +157,5 @@ export class PacienteComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
-
-
 
 }

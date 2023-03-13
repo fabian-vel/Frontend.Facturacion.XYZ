@@ -4,36 +4,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { DuenioService } from 'src/app/services/duenio.service';
+
+
 export interface Duenio {
   id: number,
   tipodoc: string,
   doc: string;
   duenio: string,
 }
-
-const ELEMENT_DATA: Duenio[] = [
-  { id: 1, tipodoc: 'CC', doc: '234156', duenio: 'Maria'},
-  { id: 2, tipodoc: 'CC', doc: '234156', duenio: 'Pedro'},
-  { id: 3, tipodoc: 'CC', doc: '234156', duenio: 'Juan'},
-  { id: 4, tipodoc: 'CC', doc: '234156', duenio: 'Ana'},
-  { id: 5, tipodoc: 'CC', doc: '234156', duenio: 'Samuel'},
-  { id: 6, tipodoc: 'CC', doc: '234156', duenio: 'Teo'},
-  { id: 7, tipodoc: 'CC', doc: '234156', duenio: 'Patricia'},
-  { id: 1, tipodoc: 'CC', doc: '234156', duenio: 'Maria'},
-  { id: 2, tipodoc: 'CC', doc: '234156', duenio: 'Pedro'},
-  { id: 3, tipodoc: 'CC', doc: '234156', duenio: 'Juan'},
-  { id: 4, tipodoc: 'CC', doc: '234156', duenio: 'Ana'},
-  { id: 5, tipodoc: 'CC', doc: '234156', duenio: 'Samuel'},
-  { id: 6, tipodoc: 'CC', doc: '234156', duenio: 'Teo'},
-  { id: 7, tipodoc: 'CC', doc: '234156', duenio: 'Patricia'},
-  { id: 1, tipodoc: 'CC', doc: '234156', duenio: 'Maria'},
-  { id: 2, tipodoc: 'CC', doc: '234156', duenio: 'Pedro'},
-  { id: 3, tipodoc: 'CC', doc: '234156', duenio: 'Juan'},
-  { id: 4, tipodoc: 'CC', doc: '234156', duenio: 'Ana'},
-  { id: 5, tipodoc: 'CC', doc: '234156', duenio: 'Samuel'},
-  { id: 6, tipodoc: 'CC', doc: '234156', duenio: 'Teo'},
-  { id: 7, tipodoc: 'CC', doc: '234156', duenio: 'Patricia'}
-];
 
 @Component({
   selector: 'app-duenio',
