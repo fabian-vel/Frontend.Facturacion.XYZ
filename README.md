@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # FacturacionXYZFront
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8.
@@ -29,3 +30,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 =======
 # Softcaribbean.Facturacio.XYZ
 >>>>>>> 3a467641d3fdad72b9be67eed46000f60a87bd73
+=======
+# Frontend.Facturacion.XYZ
+>>>>>>> 5d9c7af75c014ee3606d228e703dc1bb908a3808
