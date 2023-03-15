@@ -5,8 +5,7 @@ import { DuenioComponent } from '../duenio/duenio.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { PacientesService } from 'src/app/services/pacientes.service';
 import { DuenioService } from 'src/app/services/duenio.service';
-import { Paciente } from 'src/app/interfaces/pacientes';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -28,12 +27,14 @@ export class PacienteComponent implements OnInit {
   paciente: any;
   duenio: any;
   activar: boolean = false;
-  displayedColumns: string[] = ['idp', 'nombrep', 'especie', 'raza', 'fecha_nacimiento', 'tipo_documento', 'documento', 'duenio', 'ciudad', 'direccion', 'telefono', 'fecha_registro'];
-  columnsToDisplay: string[] = this.displayedColumns.slice();
+  displayedColumns: string[] = ['nombrep', 'especie', 'raza', 'fecha_nacimiento', 'tipo_documento', 'documento', 'duenio', 'ciudad', 'direccion', 'telefono', 'fecha_registro'];
   formGroup!: FormGroup;
 
-  constructor(public dialog: MatDialog, private pacienteService: PacientesService, private duenioService: DuenioService) {
-  }
+  constructor(
+    public dialog: MatDialog,
+    private pacienteService: PacientesService,
+    private duenioService: DuenioService
+  ) { }
 
   ngOnInit(): void {
 
@@ -81,7 +82,7 @@ export class PacienteComponent implements OnInit {
   updatePaciente(form: FormGroup) {
     this.pacienteService.updatePacientes(form.value)
       .subscribe(datos => {
-        this.onActivar();
+        this.onActivar(false);
         this.refreshDatos();
         alert("Se actualizó la información del paciente");
       })
@@ -110,18 +111,19 @@ export class PacienteComponent implements OnInit {
 
   deletePaciente() {
     this.pacienteService.deletePacientes(this.paciente.idp)
-    .subscribe(datos => {
-      alert("Paciente elininado");
-      this.refreshDatos();
-    });
+      .subscribe(datos => {
+        alert("Paciente elininado");
+        this.refreshDatos();
+      });
   }
 
-  onActivar() {
-    this.activar = !this.activar;
-    console.log(this.activar);
+  onActivar(act: boolean) {
+    this.activar = act;
+    console.log('onActivar: ' + this.activar);
   }
 
   refreshDatos() {
+    this.formGroup.reset();
     this.pacienteService.getPacientes()
       .subscribe(datos => {
         this.datosPacientes = datos;
@@ -130,11 +132,8 @@ export class PacienteComponent implements OnInit {
   }
 
   openDialog(ngModal: any) {
-    const dialogRef = this.dialog.open(ngModal);
     this.refreshDatos();
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    const dialogRef = this.dialog.open(ngModal);
   }
 
   openDialogUpdate(ngModal: any) {

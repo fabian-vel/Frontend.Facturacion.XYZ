@@ -72,7 +72,8 @@
     </mat-dialog-content>
 
     <mat-dialog-actions>
-        <button mat-raised-button color="primary" mat-dialog-close (click)="savePaciente(formGroup)"><mat-icon>save</mat-icon></button>
+        <button mat-raised-button color="primary" mat-dialog-close
+            (click)="savePaciente(formGroup)"><mat-icon>save</mat-icon></button>
     </mat-dialog-actions>
 
 </ng-template>
@@ -86,12 +87,12 @@
         <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="openDialog(ngModal)" class="button-add">
+    <button mat-raised-button color="primary" (click)="openDialog(ngModal); onActivar(false)" class="button-add">
         <mat-icon>pets</mat-icon> Nuevo Paciente</button>
     <button mat-raised-button color="primary" (click)="openDialogDuenio()" class="button-add">
         <mat-icon>person</mat-icon> Nuevo dueño paciente</button>
 
-    <table mat-table [dataSource]="datosPacientes" class="mat-elevation-z8" matTableExporter #exporter="matTableExporter">
+    <!-- <table mat-table [dataSource]="datosPacientes" class="mat-elevation-z8" matTableExporter #exporter="matTableExporter">
 
         <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
             <th mat-header-cell *matHeaderCellDef> {{column}} </th>
@@ -102,10 +103,70 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" [matMenuTriggerFor]="menu" class="btr"></tr>
         <mat-menu #menu="matMenu" xPosition="after" style="background-color: rgba(0, 0, 0, 0.123);">
             <button mat-mini-fab color="accent" style="margin: 5px;"
-                (click)="openDialogUpdate(ngModal)" (click)="loadPaciente(); onActivar()"><mat-icon>create</mat-icon></button>
+                (click)="openDialogUpdate(ngModal)" (click)="loadPaciente(); onActivar(true)"><mat-icon>create</mat-icon></button>
             <button mat-mini-fab color="warn" style="margin: 5px;" (click)="deletePaciente()"><mat-icon>delete</mat-icon></button>
         </mat-menu>
 
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No hay datos que coincidan con "{{input.value}}"</td>
+        </tr>
+    </table> -->
+
+    <table mat-table [dataSource]="datosPacientes" class="mat-elevation-z8" matTableExporter
+        #exporter="matTableExporter">
+        <ng-container matColumnDef="nombrep">
+            <th mat-header-cell *matHeaderCellDef> Nombre<br>Paciente </th>
+            <td mat-cell *matCellDef="let element" (click)="value(element)"> {{element.nombrep}} </td>
+        </ng-container>
+        <ng-container matColumnDef="especie">
+            <th mat-header-cell *matHeaderCellDef> Especie </th>
+            <td mat-cell *matCellDef="let element" (click)="value(element)"> {{element.especie}} </td>
+        </ng-container>
+        <ng-container matColumnDef="raza">
+            <th mat-header-cell *matHeaderCellDef> Raza </th>
+            <td mat-cell *matCellDef="let element" (click)="value(element)"> {{element.raza}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fecha_nacimiento">
+            <th mat-header-cell *matHeaderCellDef> Fecha <br>Nacimiento </th>
+            <td mat-cell *matCellDef="let element" (click)="value(element)"> {{element.fecha_nacimiento}} </td>
+        </ng-container>
+        <ng-container matColumnDef="tipo_documento">
+            <th mat-header-cell *matHeaderCellDef> Tipo <br>documento </th>
+            <td mat-cell *matCellDef="let element" (click)="value(element)"> {{element.tipo_documento}} </td>
+        </ng-container>
+        <ng-container matColumnDef="documento">
+            <th mat-header-cell *matHeaderCellDef> # Documento </th>
+            <td mat-cell *matCellDef="let element" (click)="value(element)"> {{element.documento}} </td>
+        </ng-container>
+        <ng-container matColumnDef="duenio">
+            <th mat-header-cell *matHeaderCellDef> Nombre <br>Dueño </th>
+            <td mat-cell *matCellDef="let element" (click)="value(element)"> {{element.duenio}} </td>
+        </ng-container>
+        <ng-container matColumnDef="ciudad">
+            <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+            <td mat-cell *matCellDef="let element" (click)="value(element)"> {{element.ciudad}} </td>
+        </ng-container>
+        <ng-container matColumnDef="direccion">
+            <th mat-header-cell *matHeaderCellDef> Direccion </th>
+            <td mat-cell *matCellDef="let element" (click)="value(element)"> {{element.direccion}} </td>
+        </ng-container>
+        <ng-container matColumnDef="telefono">
+            <th mat-header-cell *matHeaderCellDef> Telefono </th>
+            <td mat-cell *matCellDef="let element" (click)="value(element)"> {{element.telefono}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fecha_registro">
+            <th mat-header-cell *matHeaderCellDef> Fecha <br>Registro </th>
+            <td mat-cell *matCellDef="let element" (click)="value(element)"> {{element.fecha_registro}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [matMenuTriggerFor]="menu" class="btr"></tr>
+        <mat-menu #menu="matMenu" xPosition="after" style="background-color: rgba(0, 0, 0, 0.123);">
+            <button mat-mini-fab color="accent" style="margin: 5px;" (click)="openDialogUpdate(ngModal)"
+                (click)="loadPaciente(); onActivar(true)"><mat-icon>create</mat-icon></button>
+            <button mat-mini-fab color="warn" style="margin: 5px;"
+                (click)="deletePaciente()"><mat-icon>delete</mat-icon></button>
+        </mat-menu>
         <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">No hay datos que coincidan con "{{input.value}}"</td>
         </tr>
